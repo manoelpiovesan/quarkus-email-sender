@@ -16,7 +16,11 @@ public class EmailRepository {
     public Email sendEmail(Email email) {
         validateEmail(email);
 
-        mailer.send(Mail.withText(email.email, email.subject, email.message));
+        try{
+            mailer.send(Mail.withText(email.email, email.subject, email.message));
+        } catch (Exception e) {
+            throw new WebApplicationException("Error sending email", 500);
+        }
 
         return email;
     }
