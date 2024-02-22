@@ -19,7 +19,7 @@ public class EmailRepository {
         try{
             mailer.send(Mail.withText(email.email, email.subject, email.message));
         } catch (Exception e) {
-            throw new WebApplicationException("Error sending email", 500);
+            throw new WebApplicationException(e.toString(), 500);
         }
 
         return email;
