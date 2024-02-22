@@ -1,6 +1,7 @@
 package io.github.manoelpiovesan.repositories;
 
 import io.github.manoelpiovesan.entities.Email;
+import io.github.manoelpiovesan.enums.EmailStatus;
 import io.quarkus.mailer.Mail;
 import io.quarkus.mailer.Mailer;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -16,11 +17,17 @@ public class EmailRepository {
     public Email sendEmail(Email email) {
         validateEmail(email);
 
+        email.status = EmailStatus.PENDING;
+
         try{
             mailer.send(Mail.withText(email.email, email.subject, email.message));
+            email.status = EmailStatus.SENT;
         } catch (Exception e) {
+            email.status = EmailStatus.ERROR;
             throw new WebApplicationException(e.toString(), 500);
         }
+
+        email.persist();
 
         return email;
     }
