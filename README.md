@@ -13,18 +13,21 @@ POST localhost:8080/email
 }
 ```
 
-### Configuration
-You need to set the following application properties:
-```properties
-quarkus.mailer.username=<your_email>
-quarkus.mailer.password=<your_password>
-quarkus.mailer.from=<your_email>
-```
-
-### Run
+### Build image
 ```shell
 ./gradlew clean build
 ```
 ```shell
-java -jar build/quarkus-app/quarkus-run.jar
+docker build -f src/main/docker/Dockerfile.jvm -t manoelpiovesan/quarkus-email-sender-jvm .
 ```
+### Configure environment variables on docker-compose.yml
+```
+MAIL_USERNAME: ""
+MAIL_PASSWORD: ""
+```
+
+then, up the docker compose
+```shell
+docker compose up
+```
+
