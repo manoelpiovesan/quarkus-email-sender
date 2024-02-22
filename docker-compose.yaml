@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: emailsender
+      POSTGRES_PASSWORD: email@sender123
+      POSTGRES_DB: emails
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres-data:/var/lib/postgresql/data
+
+    networks:
+      - quarkus-email-sender-network
+
+  quarkusemailsender:
+    image: manoelpiovesan/quarkus-mail-sender-jvm
+    container_name: quarkusemailsender
+    ports:
+      - "8080:8080"
+    environment:
+      DATASOURCE_URL: jdbc:postgresql://postgres:5432/emails
+      POSTGRES_USERNAME: emailsender
+      POSTGRES_PASSWORD: email@sender123
+      MAIL_USERNAME: <your_email>
+      MAIL_PASSWORD: <your_password>
+    networks:
+      - quarkus-email-sender-network
+    depends_on:
+      - postgres
+
+networks:
+  quarkus-email-sender-network:
+    driver: bridge
