@@ -12,6 +12,44 @@ POST localhost:8080/email
   "message": "Message"
 }
 ```
+```
+GET localhost:8080/email
+```
+```json
+[
+  {
+    "id": 1,
+    "email": "example@example.com",
+    "subject": "Subject",
+    "message": "Message"
+  }
+]
+```
+```
+GET localhost:8080/email/{id}
+```
+```json
+{
+  "id": 1,
+  "email": "example@example.com",
+  "subject": "Subject",
+  "message": "Message"
+}
+```
+```
+DELETE localhost:8080/email/{id}
+```
+```
+NoContent
+```
+```
+GET localhost:8080/email/count
+```
+```json
+1
+```
+
+
 ### Edit application.properties
 ```properties
 quarkus.mailer.username=<your_email>
