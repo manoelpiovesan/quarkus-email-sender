@@ -21,11 +21,11 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DATASOURCE_URL: jdbc:postgresql://postgres:5432/emails
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/emails
       POSTGRES_USERNAME: emailsender
       POSTGRES_PASSWORD: email@sender123
-      MAIL_USERNAME: <your_email>
-      MAIL_PASSWORD: <your_password>
+      SMTP_EMAIL: manoelpiovesan99@gmail.com
+      SMTP_PASSWORD: jnprpzetmjrpjqni
     networks:
       - quarkus-email-sender-network
     depends_on:

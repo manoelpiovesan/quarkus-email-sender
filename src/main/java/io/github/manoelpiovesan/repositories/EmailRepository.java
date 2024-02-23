@@ -6,6 +6,7 @@ import io.quarkus.mailer.Mail;
 import io.quarkus.mailer.Mailer;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
 
 @ApplicationScoped
@@ -14,6 +15,7 @@ public class EmailRepository {
     @Inject
     Mailer mailer;
 
+    @Transactional
     public Email sendEmail(Email email) {
         validateEmail(email);
 
