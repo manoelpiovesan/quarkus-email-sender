@@ -12,6 +12,12 @@ POST localhost:8080/email
   "message": "Message"
 }
 ```
+### Edit application.properties
+```properties
+quarkus.mailer.username=<your_email>
+quarkus.mailer.password=<your_password>
+quarkus.mailer.from=<your_email>
+```
 
 ### Build image
 ```shell
@@ -20,12 +26,6 @@ POST localhost:8080/email
 ```shell
 docker build -f src/main/docker/Dockerfile.jvm -t manoelpiovesan/quarkus-email-sender-jvm .
 ```
-### Configure environment variables on docker-compose.yml
-```
-MAIL_USERNAME: ""
-MAIL_PASSWORD: ""
-```
-
 then, up the docker compose
 ```shell
 docker compose up
