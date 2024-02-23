@@ -49,14 +49,6 @@ GET localhost:8080/email/count
 1
 ```
 
-
-### Edit application.properties
-```properties
-quarkus.mailer.username=<your_email>
-quarkus.mailer.password=<your_password>
-quarkus.mailer.from=<your_email>
-```
-
 ### Build image
 ```shell
 ./gradlew clean build
@@ -64,6 +56,13 @@ quarkus.mailer.from=<your_email>
 ```shell
 docker build -f src/main/docker/Dockerfile.jvm -t manoelpiovesan/quarkus-email-sender-jvm .
 ```
+### Configure environment variables in docker-compose.yml
+```shell
+      QUARKUS_MAILER_USERNAME: your_email@example.com
+      QUARKUS_MAILER_FROM: your_email@example.com
+      QUARKUS_MAILER_PASSWORD: your_password
+```
+
 then, up the docker compose
 ```shell
 docker compose up
