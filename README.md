@@ -62,6 +62,12 @@ docker build -f src/main/docker/Dockerfile.jvm -t manoelpiovesan/quarkus-email-s
       QUARKUS_MAILER_FROM: your_email@example.com
       QUARKUS_MAILER_PASSWORD: your_password
 ```
+### Configure environment variables in docker-swarm.yml
+```shell
+      QUARKUS_MAILER_USERNAME: your_email@example.com
+      QUARKUS_MAILER_FROM: your_email@example.com
+      QUARKUS_MAILER_PASSWORD: your_password
+```
 
 then, up the docker compose
 ```shell
