@@ -26,7 +26,8 @@ public class EmailRepository {
             email.status = EmailStatus.SENT;
         } catch (Exception e) {
             email.status = EmailStatus.ERROR;
-            throw new WebApplicationException(e.toString(), 500);
+            email.persist();
+            return email;
         }
 
         email.persist();

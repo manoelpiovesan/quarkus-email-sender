@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: emailsender
+      POSTGRES_PASSWORD: email@sender123
+      POSTGRES_DB: emails
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres-data:/var/lib/postgresql/data
+
+
+  quarkusemailsender:
+    image: manoelpiovesan/quarkus-mail-sender-jvm
+    ports:
+      - "8080:8080"
+    environment:
+      QUARKUS_DATASOURCE_DB_KIND: jdbc:postgresql://postgres:5432/emails
+      QUARKUS_DATASOURCE_USERNAME: emailsender
+      QUARKUS_DATASOURCE_PASSWORD: email@sender123
+      QUARKUS_MAILER_USERNAME:
+      QUARKUS_MAILER_FROM:
+      QUARKUS_MAILER_PASSWORD:
+
+    depends_on:
+      - postgres
+    deploy:
+      replicas: 2
