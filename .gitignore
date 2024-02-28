@@ -2,6 +2,9 @@
 .gradle/
 build/
 
+# PostgreSQL
+postgres-data/
+
 # Eclipse
 .project
 .classpath

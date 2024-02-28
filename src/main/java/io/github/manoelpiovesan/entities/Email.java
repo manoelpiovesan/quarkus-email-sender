@@ -5,6 +5,8 @@ import io.github.manoelpiovesan.enums.EmailStatus;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Email extends PanacheEntityBase {
 
@@ -20,6 +22,13 @@ public class Email extends PanacheEntityBase {
 
     @Column(name = "subject", nullable = false, length = 100)
     public String subject;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Column(name = "created_at", nullable = false)
+    public LocalDateTime createdAt = LocalDateTime.now()
+                                                  .atZone(java.time.ZoneId.of(
+                                                          "America/Sao_Paulo"))
+                                                  .toLocalDateTime();
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "status")
